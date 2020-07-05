@@ -1,0 +1,64 @@
+
+#Brad Burkett
+
+#SWDV 630 2W 20/SU2 - Week 1 - In your Interface
+
+#Date 07/05/20
+
+
+import collections
+
+class Teams:
+    def __init__(self, members):
+        self.__myTeam = members
+        self.index = len(members)
+
+    def __len__(self):
+        return len(self.__myTeam)
+
+    #1)Add __contains__ protocol 
+    def __contains__(self, member):
+        return member in self.__myTeam
+
+    #2)Add __iter__ protocol 
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index == 0:
+            raise StopIteration
+        self.index  = self.index - 1
+        return self.__myTeam[self.index]
+
+def main():
+    classmates = Teams(['John', 'Steve', 'Tim'])
+    print (len(classmates))
+
+    #1)Add the __contains__ protocol and show whether or not  'Tim' and 'Sam' are part of our team.  
+    
+    #Is Tim part of our team
+    if ("Tim" in classmates):
+        print ("Tim is part of our team")
+    else:
+        print ("Tim is not part of our team")
+    #Is Sam part of our team
+    if ("Sam" in classmates):
+        print ("Sam is part of our team")
+    else:
+        print ("Sam is not part of our team")
+
+    #2)Add the __iter__ protocol and show how you can print each member of the classmates object.
+        
+    iter(classmates)
+    print()
+    print("List of team members")
+    for member in classmates:
+        print(member) 
+
+    #3)Determine if the class classmates implements the __len__ method.
+    print()
+    method = isinstance(classmates.__len__, collections.abc.Callable)
+    print (method)
+
+main()
+
